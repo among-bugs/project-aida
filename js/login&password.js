@@ -3,69 +3,52 @@
 let login = document.getElementById('login');
 let pass = document.getElementById('password');
 
-let alerts = {
-    main: {
-        creating :
-        `<div 
-            class="alert alert-warning alert-dismissible fade show" 
-            role="alert" 
-            style="font-size: small;">
-        </div>`,
+// let alerts = {
+//     when: {
+//         missedTypingLoginOrPassFrase: {
+//             content: ""
+//         },
+//         enteredIncorrectValues: {
+//             content: ""
+//         },
+//         uncheckedCheckbox: {
+//             content: ""
+//         }
+//     }
+// };
 
-        buttonToClose: `
-            <button 
-                type="button" 
-                class="btn-close" 
-                data-bs-dismiss="alert" 
-                aria-label="Close">
-            </button>`
-    },
+$('#main-alert-show').hide();
+$('#empty-or-null-alert-show').hide();
+$('#error-alert-show').hide();
+$('#unchecked-alert-show').hide();
 
-    when: {
-        missedTypingLoginOrPassFrase: {
-            content: "123456789"
-        },
-        enteredIncorrectValues: {
-            content: ""
-        },
-        uncheckedCheckbox: {
-            content: ""
-        }
-    }
-};
+function showMainAlert() {
+    $('#main-alert-show').show();
+}
 
-let alertToInsert = alerts.main.creating;
-// // alertToInsert.outerHTML = 'role="alert"';
-// for (let indx = 0; indx < alerts.main.classlists.length; indx++ ) {
-//     alertToInsert.className += (` ${alerts.main.classlists[indx]}`);
-// }
+setTimeout(showMainAlert, 1000);
 
 function loginAndPassValid(thisLogin, thisPassword) {
+
     let selectedLoginToCheck, selectedPassToCheck;
     selectedLoginToCheck = thisLogin.value;
     selectedPassToCheck = thisPassword.value;
-    
-    function showAlert() {
-        alertToInsert.innerHTML =  
-        alerts.when.missedTypingLoginOrPassFrase.content + alerts.main.buttonToClose;
-        document.querySelector('.before-alert').after(alertToInsert);
+
+    function selectionToCheck(checkingValue, phrase) {
+        if (checkingValue == "" || checkingValue == null) {
+            $('#empty-or-null-alert-show').show();
+        } else if (checkingValue == phrase) {
+            if (document.getElementById("this-checkbox-to-staff-changing").checked) {
+                document.location = `index.html`;
+            } else {
+                $('#unchecked-alert-show').show();
+            }
+        } else {
+            $('#error-alert-show').show();
+        }
     }
 
-    // function  checkingInputs(SelectionToCheck) {
-    if (selectedLoginToCheck == "" || selectedLoginToCheck == null) {
-        showAlert();
-    }
+    selectionToCheck(selectedLoginToCheck, 'admin');
+    selectionToCheck(selectedPassToCheck, 'admin123456');
 
-    if (selectedPassToCheck == "" || selectedPassToCheck == null) {
-        showAlert();
-    }
-
-    // if (selectedLoginToCheck == 'admin' && selectedPassToCheck == "admin123456") {
-    //         if (document.getElementById("this-checkbox-to-staff-changing").checked) {
-    //             location = `index.html`;
-    //         }
-    // }
-    // else {
-    //     console.log('invalid values');
-    // }
 }

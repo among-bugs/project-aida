@@ -36,7 +36,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-4">
-
                 <form class="ui form">
                     <div class="row justify-content-center">
                         <div class="col-auto">
@@ -46,8 +45,23 @@
                     </div>
                     <br class="before-alert">
 
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: small;">
+                    <div class="alert alert-warning alert-dismissible fade show" id="main-alert-show" role="alert" style="font-size: small;">
                         <strong>Мәліметтер өңдеу бөліміне қош келдіңіз!</strong> Бұл бөлімге кіруге рұқсат алу үшін төмендегі енгізу жолына <strong>Логин</strong> және <strong>Құпия сөз</strong> енгізіңіз.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissible fade show" id="empty-or-null-alert-show" role="alert" style="font-size: small;">
+                        <strong>Логин</strong> немесе <strong>құпия сөз</strong> терілмеген! Өтінеміз, қайтадан теріп көріңіз.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissible fade show" id="error-alert-show" role="alert" style="font-size: small;">
+                        <strong>Логин</strong> немесе <strong>құпия сөз</strong> қате терілген! Өтінеміз, қайтадан теріп көріңіз. Егер есіңізде болмаса төмендегі <strong>логин | құпия сөз есімде жоқ</strong> батырмасын басу арқылы қалпына келтіре аласыз.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissible fade show" id="unchecked-alert-show" role="alert" style="font-size: small;">
+                        Жүйеге кіру үшін мәліметтерді өңдеу шарттарымен танысып, келісім білдіру қажет. Ол үшін төмендегі <strong>Мен барлық шарттармен келісемін</strong> жолына белгі қойыңыз.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
 
@@ -71,7 +85,7 @@
                                 onclick="loginAndPassValid(login, pass);" aria-current="page" style="font-size: medium;">Жүйеге кіру</a>
                         </div>
                         <div class="col-auto" style="margin-top: 5px; margin-bottom: 5px; margin-left: 8px; margin-right: 8px;">
-                            <a href="#" type="button" class="btn btn-light"style="font-size: small;"><strong>логин | құпия сөз</strong> есімде жоқ</a>
+                            <a href="restore-access.html" type="button" class="btn btn-light"style="font-size: small;"><strong>логин | құпия сөз</strong> есімде жоқ</a>
                         </div>
                     </div>
                                                                
