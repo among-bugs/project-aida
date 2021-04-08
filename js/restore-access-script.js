@@ -48,13 +48,13 @@ const contents = {
 
 const accordionButton = document.querySelector('.accordion-button');
 
-function sendEmail(selectedToken, sendTo, sendFrom, content) { //selectedToken, to, from, content
+function sendEmail(selectedToken, sendTo, sendFrom, contentSubject, contentBody) { //selectedToken, to, from, content
     Email.send({
-        SecureToken: emails.sultan.securityToken,
-        To: emails.sultan.mail,
-        From: emails.sultan.mail,
-        Subject: contents.toSendto.administrator.subject,
-        Body: contents.toSendto.administrator.body //"<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+        SecureToken: selectedToken,
+        To: sendTo,
+        From: sendFrom,
+        Subject: contentSubject,
+        Body: contentBody //"<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
     }).then(
         message => alert("mail sent successfully")
     );
@@ -66,27 +66,33 @@ function emailSendingButton() {
         case 'Бөлімді таңдаңыз':
             break;
         case 'Администратор':
-            sendEmail();
-            // sendEmail(mails.developer.securityToken,
-            // mails.administrator.mail, mails.developer.mail, 
-            // contents.toSendto.administrator);
-            console.log(mails.developer.securityToken,
-                mails.administrator.mail, mails.developer.mail,
-                contents.toSendto.administrator.body);
+            sendEmail(emails.developer.securityToken,
+                emails.administrator.mail, emails.developer.mail,
+                contents.toSendto.administrator.toRestore.subject,
+                contents.toSendto.administrator.toRestore.body);
+           window.alert('successful!');
             break;
         case 'Регистратор':
+            sendEmail(emails.developer.securityToken,
+                emails.registrator.mail, emails.developer.mail,
+                contents.toSendto.registrator.toRestore.subject,
+                contents.toSendto.registrator.toRestore.body);
+            console.log('mail sent successfully to registrar!');
             break;
         case 'Кадрлар бөлімі':
+            sendEmail(emails.developer.securityToken,
+                emails.personnelDepartment.mail, emails.developer.mail,
+                contents.toSendto.personnelDepartment.toRestore.subject,
+                contents.toSendto.personnelDepartment.toRestore.body);
+            console.log('the message successfully sended to personal department!'); 
             break;
         default:
             console.log('asdasd');
     }
-
 }
 
 
 function isClicked(selectedA) {
-    console.log('123456');
     const selectedAContent = document.getElementById(selectedA);
     switch (selectedA) {
         case 'firstA':
