@@ -1,25 +1,56 @@
 "use strict";
 
+const smtps = {
+    gmail: {
+        smtp: 'smtp.gmail.com',
+        port: 465
+    },
+    elasticEmail: {
+        smtp: 'smtp.elasticemail.com',
+        port: 2525
+    },
+    protonmail: {
+        smtp: 'smtp.protonmail.com',
+        port: 8080 //default
+    }
+
+}
+
 const emails = {
     sultan: {
         mail: 'sultanscreed@gmail.com',
-        securityToken: '5a8d474f-a4f1-4bf3-af4b-6ff75454e277'
+        smtp: {
+            name: smtps.gmail,
+            securityToken: '8eb500a4-bc1e-4d9a-813e-7f7ad973e097'
+        }
     },
     developer: {
         mail: 'aida.school.developer@protonmail.com',
-        securityToken: '994dbe83-a2a6-45f6-9576-ed72e8827ab0'
+        smtp: {
+            name: smtps.gmail,
+            securityToken: ''
+        }
     },
     administrator: {
         mail: '39.highschool.guardian@gmail.com',
-        securityToken: '9d01f9ca-c3c5-4eba-a74a-d1365d406f15',
+        smtp: {
+            name: smtps.gmail,
+            securityToken: ''
+        }
     },
     registrator: {
         mail: '39.highschool.registrar@gmail.com',
-        securityToken: 'e45e0868-60ea-4082-8ff4-379e6eb43f7a'
+        smtp: {
+            name: smtps.gmail,
+            securityToken: ''
+        }
     },
     personnelDepartment: {
         mail: '39.highschool.personal.department@gmail.com',
-        securityToken: '57c40788-947a-474d-ba1b-31efb9d567fc'
+        smtp: {
+            name: smtps.gmail,
+            securityToken: ''
+        }
     }
 };
 
@@ -27,20 +58,29 @@ const contents = {
     toSendto: {
         administrator: {
             toRestore: {
-                subject: 'administrator!',
-                body: '<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>'
+                subject: 'Құпия сөзді қалпына келтіру • Администрация',
+                body: `<html>
+                        <h2>Құрметті гимназия админитрациясы!</h2>
+
+                      </html>`
             }
         },
         registrator: {
             toRestore: {
-                subject: 'registrator!',
-                body: '<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>'
+                subject: 'Құпия сөзді қалпына келтіру • Регистратура',
+                body: `<html>
+                        <h2>Құрметті гимназия регистратурасы!</h2>
+
+                      </html>`
             }
         },
         personnelDepartment: {
             toRestore: {
-                subject: 'personnelDepartment!',
-                body: '<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>'
+                subject: 'Құпия сөзді қалпына келтіру • Кадрлар бөлімі',
+                body: `<html>
+                        <h2>Құрметті гимназия кадрлар бөлімі!</h2>
+
+                      </html>`
             }
         }
     }
@@ -66,8 +106,8 @@ function emailSendingButton() {
         case 'Бөлімді таңдаңыз':
             break;
         case 'Администратор':
-            sendEmail(emails.developer.securityToken,
-                emails.administrator.mail, emails.developer.mail,
+            sendEmail(emails.sultan.smtp.securityToken,
+                emails.administrator.mail, emails.sultan.mail,
                 contents.toSendto.administrator.toRestore.subject,
                 contents.toSendto.administrator.toRestore.body);
            window.alert('successful!');
