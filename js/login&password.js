@@ -2,7 +2,7 @@
 
 let login = document.getElementById('login');
 let pass = document.getElementById('password');
-
+const thisSecretPassword = 'admin123456';
 // let alerts = {
 //     when: {
 //         missedTypingLoginOrPassFrase: {
@@ -47,8 +47,8 @@ function loginAndPassValid(thisLogin, thisPassword) {
             $('#error-alert-show').show();
         }
     }
-
+    
     selectionToCheck(selectedLoginToCheck, 'admin');
-    selectionToCheck(selectedPassToCheck, 'admin123456');
-
+    selectionToCheck(selectedPassToCheck, thisSecretPassword);
+    
 }
