@@ -70,9 +70,9 @@ const contents = {
                 subject: 'Құпия сөзді қалпына келтіру • Регистратура',
                 body: `<html>
                         <h2>Құрметті гимназия регистратурасы!</h2>
-                            <br>
-                            Cіздің жүйеге кіру құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
-                            <br> 
+                                <br>
+                                Cіздің жүйеге кіру құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
+                                <br> 
                             Егер тағы да <strong>құпия сөзді</strong> қалпына келтіру қызметін пайдаланғыңыз келсе, осы жерден таба аласыз!   
                       </html>`
             }
@@ -100,14 +100,18 @@ function sendEmail(selectedToken, sendTo, sendFrom, contentSubject, contentBody)
         To: sendTo,
         From: sendFrom,
         Subject: contentSubject,
-        Body: contentBody //"<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+        Body: contentBody  //"<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
     }).then(
         message => alert("mail sent successfully")
     );
 }
 
 function emailSendingButton() {
+    if () {
 
+    } else {
+        
+    }
     switch (accordionButton.textContent) {
         case 'Бөлімді таңдаңыз':
             break;
@@ -136,7 +140,6 @@ function emailSendingButton() {
             console.log('asdasd');
     }
 }
-
 
 function isClicked(selectedA) {
     const selectedAContent = document.getElementById(selectedA);
