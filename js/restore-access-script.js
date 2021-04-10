@@ -1,5 +1,12 @@
 "use strict";
 
+const thisTypedEmailValue = document.getElementById('typeYourEmail').value;
+
+document.querySelector('.your-own-email-is-here').append(thisTypedEmailValue);
+
+$('#own-mail-is-not-entered-alert-show').hide();
+$('#own-mail-is-entered-alert-show').hide();
+
 const smtps = {
     gmail: {
         smtp: 'smtp.gmail.com',
@@ -50,7 +57,7 @@ const emails = {
         }
     }
 };
-        
+
 const contents = {
     toSendto: {
         administrator: {
@@ -59,7 +66,7 @@ const contents = {
                 body: `<html lang="en"> 
                         <h2>Құрметті гимназия админиcтрациясы!</h2>
                             <br>
-                            Cіздің жүйеге кіру құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
+                            Cіздің жүйеге кіруге арналған құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
                             <br> 
                             Егер тағы да <strong>құпия сөзді</strong> қалпына келтіру қызметін пайдаланғыңыз келсе, осы жерден таба аласыз!
                       </html>`
@@ -71,7 +78,7 @@ const contents = {
                 body: `<html>
                         <h2>Құрметті гимназия регистратурасы!</h2>
                                 <br>
-                                Cіздің жүйеге кіру құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
+                                Cіздің жүйеге кіруге арналған құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
                                 <br> 
                             Егер тағы да <strong>құпия сөзді</strong> қалпына келтіру қызметін пайдаланғыңыз келсе, осы жерден таба аласыз!   
                       </html>`
@@ -83,7 +90,19 @@ const contents = {
                 body: `<html>
                         <h2>Құрметті гимназия кадрлар бөлімі!</h2>
                             <br>
-                            Cіздің жүйеге кіру құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
+                            Cіздің жүйеге кіруге арналған құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
+                            <br> 
+                            Егер тағы да <strong>құпия сөзді</strong> қалпына келтіру қызметін пайдаланғыңыз келсе, осы жерден таба аласыз!
+                        </html>`
+            }
+        },
+        otherMail: {
+            toRestore: {
+                subject: `Құпия сөзді қалпына келтіру • ${thisTypedEmailValue}`,
+                body: `<html>
+                            <h2>Құрметті ${thisTypedEmailValue}!</h2>
+                            <br>
+                            Cіздің жүйеге кіруге арналған құпия сөзіңіз: <strong>${thisSecretPassword}</strong>.
                             <br> 
                             Егер тағы да <strong>құпия сөзді</strong> қалпына келтіру қызметін пайдаланғыңыз келсе, осы жерден таба аласыз!
                         </html>`
@@ -100,44 +119,71 @@ function sendEmail(selectedToken, sendTo, sendFrom, contentSubject, contentBody)
         To: sendTo,
         From: sendFrom,
         Subject: contentSubject,
-        Body: contentBody  //"<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+        Body: contentBody //"<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
     }).then(
         message => alert("mail sent successfully")
     );
 }
 
-function emailSendingButton() {
-    if () {
-
-    } else {
-        
-    }
+function accordionButtonHandlerSwitch() {
     switch (accordionButton.textContent) {
         case 'Бөлімді таңдаңыз':
+            //
             break;
         case 'Администратор':
             sendEmail(emails.developer.smtp.securityToken,
                 emails.administrator.mail, emails.developer.mail,
                 contents.toSendto.administrator.toRestore.subject,
                 contents.toSendto.administrator.toRestore.body);
-           window.alert('successful!');
+            window.alert('mail sent successfully to admin!');
             break;
         case 'Регистратор':
             sendEmail(emails.developer.securityToken,
                 emails.registrator.mail, emails.developer.mail,
                 contents.toSendto.registrator.toRestore.subject,
                 contents.toSendto.registrator.toRestore.body);
-            console.log('mail sent successfully to registrar!');
+            window.alert('mail sent successfully to registrar!');
             break;
         case 'Кадрлар бөлімі':
             sendEmail(emails.developer.securityToken,
                 emails.personnelDepartment.mail, emails.developer.mail,
                 contents.toSendto.personnelDepartment.toRestore.subject,
                 contents.toSendto.personnelDepartment.toRestore.body);
-            console.log('the message successfully sended to personal department!'); 
+            window.alert('the message successfully sended to personal department!');
             break;
         default:
             console.log('asdasd');
+    }
+}
+
+function ownEmailSendingButton() {
+    
+    let myForm = document.getElementById('typeYourEmail').value;
+
+    if (myForm == "") {
+        $('#own-mail-is-not-entered-alert-show').show();
+        window.alert('asdasd');
+        return false;
+    }
+     if (myForm == "sultanscreed@gmail.com") {
+        sendEmail(emails.developer.smtp.securityToken,
+            thisTypedEmailValue, emails.developer.mail,
+            contents.toSendto.otherMail.toRestore.subject,
+            contents.toSendto.otherMail.toRestore.body);
+        $('#own-mail-is-entered-alert-show').show();
+        return true;
+    }
+}
+
+function departmentsEmailSendingButton() {
+    // if (thisTypedEmailValue == "" || accordionButton.textContent == "Бөлімді таңдаңыз") {
+    //      $('#own-mail-is-not-entered-alert-show').show(); 
+    // }
+
+    if (accordionButton.textContent == "Бөлімді таңдаңыз") {
+
+    } else {
+        accordionButtonHandlerSwitch();
     }
 }
 

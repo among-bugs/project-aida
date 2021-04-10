@@ -50,21 +50,34 @@
                     <br class="before-alert"> 
                     <!-- must to change classname -->
 
-                    <!--<div class="alert alert-warning alert-dismissible fade show" id="main-alert-show" role="alert" style="font-size: small;">
+                    <!-- <div class="alert alert-warning alert-dismissible fade show" id="main-alert-show" role="alert" style="font-size: small;">
                         <strong>Мәліметтер өңдеу бөліміне қош келдіңіз!</strong> Бұл бөлімге кіруге рұқсат алу үшін төмендегі енгізу жолына <strong>Логин</strong> және <strong>Құпия сөз</strong> енгізіңіз.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div> -->
+
+                    <div class="alert alert-danger alert-dismissible fade show" id="own-mail-is-not-entered-alert-show" role="alert" style="font-size: small;">
+                        Сіздің жеке <strong>поштаңыз</strong> терілмеген! Өтінеміз, қайтадан теріп көріңіз немесе төмендегі <strong>Бөлімді таңдаңыз</strong> батырмасын басып, керекті бөлімді таңдап, сұраныс жібере аласыз!
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
 
-                    <div class="alert alert-danger alert-dismissible fade show" id="empty-or-null-alert-show" role="alert" style="font-size: small;">
-                        <strong>Логин</strong> немесе <strong>құпия сөз</strong> терілмеген! Өтінеміз, қайтадан теріп көріңіз.
+                    <div class="alert alert-success alert-dismissible fade show" id="own-mail-is-entered-alert-show" role="alert" style="font-size: small;">
+                        Cіздің поштаңызға ( <strong class="your-own-email-is-here"></strong> ) хабарлама сәтті жіберілді! Өтінеміз, күте тұрыңыз...
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>-->
+                    </div>
 
                     <div class="field" style="font-size: auto;">
                       <label>Пошта</label>
-                      <input type="text" id="login" placeholder="Поштаңызды теріңіз">
+                        <form name="myForm" action="#" onsubmit="return ownEmailSendingButton()" method="post" required>
+                            <input type="text" name="mname" id="typeYourEmail" placeholder="Поштаңызды теріңіз">
+                            <br style="display: block; margin: 7px 0;">
+                            <input type="submit" class="btn btn-outline-primary" value="Поштаға жіберу" >
+                        </form>
                     </div>
                     
+                    <!-- <a href="#"  id="sendEmailButton" type="submit button"
+                    value="Send Email" onclick="ownEmailSendingButton()" aria-current="page" style="font-size: auto;">Поштаға жіберу</a>
+                   <br> -->
+                   <hr>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingOne">
@@ -78,14 +91,14 @@
                                     <a href="#" id="firstA"  onclick="isClicked('firstA');" class="list-group-item list-group-item-action">Администратор</a>
                                     <a href="#" id="secondA" onclick="isClicked('secondA');" class="list-group-item list-group-item-action">Регистратор</a>
                                     <a href="#" id="thirdA"  onclick="isClicked('thirdA');" class="list-group-item list-group-item-action">Кадрлар бөлімі</a>
-                                  </div>
+                                </div>
                             </div>
                           </div>
                         </div>
                     </div>
                     <br style="display: block; margin: 7px 0;">
-                     <a href="#" class="btn btn-outline-primary" id="sendEmailButton" type="submit button"
-                     value="Send Email" onclick="emailSendingButton()" aria-current="page" style="font-size: auto;">Жіберу</a>
+                     <a href="#" class="btn btn-outline-primary" id="sendEmailButton2" type="submit button"
+                     value="Send Email" onclick="departmentsEmailSendingButton()" aria-current="page" style="font-size: auto;">Бөлімге жіберу</a>
                     <br>
                   </form>
                   <br>
