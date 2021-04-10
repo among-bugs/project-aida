@@ -2,10 +2,17 @@
 
 const thisTypedEmailValue = document.getElementById('typeYourEmail').value;
 
-document.querySelector('.your-own-email-is-here').append(thisTypedEmailValue);
+let thisValue = document.forms["myForm"]["mailname"].value;
+
+document.querySelector('.your-own-email-is-here').append(thisValue);
 
 $('#own-mail-is-not-entered-alert-show').hide();
 $('#own-mail-is-entered-alert-show').hide();
+$('#administrator-sent-alert-show').hide();
+$('#registrar-sent-alert-show').hide();
+$('#personal-depart-sent-alert-show').hide();
+
+const thisSecretPassword = "admin123456";
 
 const smtps = {
     gmail: {
@@ -41,6 +48,7 @@ const emails = {
         }
     },
     registrator: {
+        
         mail: '39.highschool.registrar@gmail.com',
         smtp: {
             name: smtps.gmail,
@@ -121,59 +129,69 @@ function sendEmail(selectedToken, sendTo, sendFrom, contentSubject, contentBody)
         Subject: contentSubject,
         Body: contentBody //"<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
     }).then(
-        message => alert("mail sent successfully")
+        message => console.log("mail sent successfully!!!")
     );
+}
+
+function goNext() {
+    function loadNextPage() {
+        document.location = "index.html";
+    }
+    setTimeout(loadNextPage, 2000);
 }
 
 function accordionButtonHandlerSwitch() {
     switch (accordionButton.textContent) {
         case 'Бөлімді таңдаңыз':
-            //
+            $('#own-mail-is-not-entered-alert-show').show();
             break;
         case 'Администратор':
             sendEmail(emails.developer.smtp.securityToken,
                 emails.administrator.mail, emails.developer.mail,
                 contents.toSendto.administrator.toRestore.subject,
                 contents.toSendto.administrator.toRestore.body);
-            window.alert('mail sent successfully to admin!');
+            $('#administrator-sent-alert-show').show();
+            goNext();
             break;
         case 'Регистратор':
             sendEmail(emails.developer.securityToken,
                 emails.registrator.mail, emails.developer.mail,
                 contents.toSendto.registrator.toRestore.subject,
                 contents.toSendto.registrator.toRestore.body);
-            window.alert('mail sent successfully to registrar!');
+            $('#registrar-sent-alert-show').show();
+            goNext();
             break;
         case 'Кадрлар бөлімі':
             sendEmail(emails.developer.securityToken,
                 emails.personnelDepartment.mail, emails.developer.mail,
                 contents.toSendto.personnelDepartment.toRestore.subject,
                 contents.toSendto.personnelDepartment.toRestore.body);
-            window.alert('the message successfully sended to personal department!');
+            $('#personal-depart-sent-alert-show').show();
+            goNext();
             break;
         default:
-            console.log('asdasd');
-    }
-}
-
-function ownEmailSendingButton() {
-    
-    let myForm = document.getElementById('typeYourEmail').value;
-
-    if (myForm == "") {
-        $('#own-mail-is-not-entered-alert-show').show();
-        window.alert('asdasd');
+            $('#own-mail-is-not-entered-alert-show').show();
         return false;
     }
-     if (myForm == "sultanscreed@gmail.com") {
+}
+
+
+function validateForm() {
+    if (thisValue == "" || thisValue == null) {
+        $('#own-mail-is-not-entered-alert-show').show();
+      return false;
+    } 
+    if (thisValue == "sultanscreed@gmail.com") {
+        // window.alert(thisValue);
         sendEmail(emails.developer.smtp.securityToken,
-            thisTypedEmailValue, emails.developer.mail,
+            thisValue, emails.developer.mail,
             contents.toSendto.otherMail.toRestore.subject,
             contents.toSendto.otherMail.toRestore.body);
-        $('#own-mail-is-entered-alert-show').show();
-        return true;
+            $('#own-mail-is-entered-alert-show').show();
+        goNext();
     }
-}
+  }
+
 
 function departmentsEmailSendingButton() {
     // if (thisTypedEmailValue == "" || accordionButton.textContent == "Бөлімді таңдаңыз") {
@@ -181,7 +199,7 @@ function departmentsEmailSendingButton() {
     // }
 
     if (accordionButton.textContent == "Бөлімді таңдаңыз") {
-
+        return false;
     } else {
         accordionButtonHandlerSwitch();
     }
