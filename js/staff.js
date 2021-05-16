@@ -1224,7 +1224,6 @@ const
 
 
 staff.forEach(function (item, i) {
-
     switch (item.subjectKAZ) {
         case subjects.deputyforEducationalWork:
             deputyEduWork.push(staff[i]);
